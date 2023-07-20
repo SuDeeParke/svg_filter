@@ -32,7 +32,9 @@
               </div>
             </div>
           </div>
-          <el-button plain @click="reset()">重设</el-button>
+           <div class="btn">
+             <el-button plain @click="reset()">重设</el-button>
+            </div>
         </el-collapse-item>
         
         <el-collapse-item title="高级项" name="2">
@@ -43,7 +45,11 @@
           <div class="slide-item">
               <label>色相</label>
               <el-slider v-model="hueRotate" show-input size="small" :min="0" :max="360" />
-            </div>
+          </div>
+          <div class="btn">
+            <el-button plain @click="resetAdvance()">重设</el-button>
+          </div>
+
         </el-collapse-item>
       </el-collapse>
 
@@ -101,6 +107,11 @@ const activeNames = ref(['1'])
 
 const reset = () => {
   matrix.value = cloneDeep(defVal);
+}
+
+const resetAdvance = () => {
+  saturate.value = 1;
+  hueRotate.value = 0;
 }
 </script>
 
@@ -184,6 +195,10 @@ const reset = () => {
     border-radius: 5px;
   }
 
+}
+
+.btn{
+  margin: 20px 0;
 }
 
 </style>
