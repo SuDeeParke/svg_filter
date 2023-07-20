@@ -7,6 +7,9 @@
           id="c1"
           type="matrix"
           :values="(matrixResult as unknown as string)" />
+
+        <feColorMatrix id="saturate" type="saturate" :values="`${(saturate)}`" />
+        <feColorMatrix type="hueRotate" :values="`${(hueRotate)}`"/>
       </filter>
     </defs>
   </svg>
@@ -16,15 +19,22 @@
       <img :src="demoPic" alt="">
     </section>
     <section class="controler">
+      <div class="title">颜色矩阵</div>
       <div class="group" v-for="(array) in matrix">
         <div class="item" v-for="(item) in array">
-          <label>{{item.name}}</label>
-          <el-slider v-model="item.value" show-input size="small" />
+          <label>{{ item.id }}:</label>
+          <div class="result">
+            {{ item.value }}
+            <div class="pop">
+              <el-slider v-model="item.value" show-input size="small" :min="-255" :max="255" />
+            </div>
+          </div>
         </div>
       </div>
 
     </section>
-    <section class="result">
+    <section class="output">
+      颜色矩阵结果：
       {{ matrixResult }}
     </section>
   </main>
@@ -43,13 +53,19 @@ import { ref, computed } from 'vue';
  *  g   0 0 0 0 0
  *  b   0 0 0 0 0
  *  a   0 0 0 0 0
- */
+ */ 
 const matrix = ref([
   [{ id: 'Rr', name: 'Red to red', value: 1 }, { id: 'Gr', name: 'Green to red', value: 0 }, { id: 'Br', name: 'Blue to red', value: 0 }, { id: 'Ar', name: 'Alpha to red', value: 0 }, { id: 'Or', name: 'red offset', value: 0 }],
   [{ id: 'Rg', name: 'Red to green', value: 0 }, { id: 'Gg', name: 'Green to green', value: 1 }, { id: 'Bg', name: 'Blue to green', value: 0 }, { id: 'Ag', name: 'Alpha to green', value: 0 }, { id: 'Og', name: 'green offset', value: 0 }],
   [{ id: 'Rb', name: 'Red to blue', value: 0 }, { id: 'Gb', name: 'Green to blue', value: 0 }, { id: 'Bb', name: 'Blue to blue', value: 1 }, { id: 'Ab', name: 'Alpha to blue', value: 0 }, { id: 'Ob', name: 'blue offset', value: 0 }],
   [{ id: 'Ra', name: 'Red to alpha', value: 0 }, { id: 'Ga', name: 'Green to alpha', value: 0 }, { id: 'Ba', name: 'Blue to alpha', value: 0 }, { id: 'Aa', name: 'Alpha to alpha', value: 1 }, { id: 'Oa', name: 'alpha offset', value: 0 }],
 ]);
+
+// 饱和度
+const saturate = ref<number>(0.5);
+
+// hueRotate
+const hueRotate = ref<number>(0);
 
 const matrixResult = computed(() => {
   return `
@@ -82,20 +98,54 @@ const matrixResult = computed(() => {
   }
 
   .controler {
+    margin-bottom: 20px;
     .group {
-      width: 100%;
+      width: 60%;
       display: flex;
       justify-content: space-between;
       .item {
         display: flex;
-
         label {
-          width: 90px;
-          padding: 0 20px 0 0;
+          margin-right: 10px;
         }
+        .result {
+          position: relative;
+          width: 80px;
+          border: 1px solid #eee;
+          text-align: center;
+          margin-left: 20px;
+          margin-right: 20px;
+
+          cursor: pointer;
+          .pop {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            width: 500px;
+            background-color: aliceblue;
+            z-index: 10;
+          }
+          &:hover{
+            .pop {
+              display: block;
+            }
+          }
+        }
+        
+      
       }
     }
 
+  }
+
+  .output{
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
   }
 
 }
