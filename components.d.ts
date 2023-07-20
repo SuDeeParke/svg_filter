@@ -7,6 +7,9 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ElButton: typeof import('element-plus/es')['ElButton']
+    ElCollapse: typeof import('element-plus/es')['ElCollapse']
+    ElCollapseItem: typeof import('element-plus/es')['ElCollapseItem']
     ElSlider: typeof import('element-plus/es')['ElSlider']
     FeColorMatrixDemo: typeof import('./src/components/feColorMatrixDemo.vue')['default']
     SvgFilter: typeof import('./src/components/SvgFilter.vue')['default']
