@@ -21,6 +21,7 @@
     <section class="controler">
       <el-collapse v-model="activeNames" >
         <el-collapse-item title="颜色矩阵" name="1">
+
           <div class="group" v-for="(array) in matrix">
             <div class="item" v-for="(item) in array">
               <label>{{ item.id }}:</label>
@@ -78,10 +79,10 @@ import {cloneDeep } from 'lodash';
  *  a   0 0 0 0 0
  */ 
 const defVal = [
-  [{ id: 'Rr', name: 'Red to red', value: 1 }, { id: 'Gr', name: 'Green to red', value: 0 }, { id: 'Br', name: 'Blue to red', value: 0 }, { id: 'Ar', name: 'Alpha to red', value: 0 }, { id: 'Or', name: 'red offset', value: 0 }],
-  [{ id: 'Rg', name: 'Red to green', value: 0 }, { id: 'Gg', name: 'Green to green', value: 1 }, { id: 'Bg', name: 'Blue to green', value: 0 }, { id: 'Ag', name: 'Alpha to green', value: 0 }, { id: 'Og', name: 'green offset', value: 0 }],
-  [{ id: 'Rb', name: 'Red to blue', value: 0 }, { id: 'Gb', name: 'Green to blue', value: 0 }, { id: 'Bb', name: 'Blue to blue', value: 1 }, { id: 'Ab', name: 'Alpha to blue', value: 0 }, { id: 'Ob', name: 'blue offset', value: 0 }],
-  [{ id: 'Ra', name: 'Red to alpha', value: 0 }, { id: 'Ga', name: 'Green to alpha', value: 0 }, { id: 'Ba', name: 'Blue to alpha', value: 0 }, { id: 'Aa', name: 'Alpha to alpha', value: 1 }, { id: 'Oa', name: 'alpha offset', value: 0 }],
+  [{ id: 'RR', name: 'Red to red', value: 1 }, { id: 'GR', name: 'Green to red', value: 0 }, { id: 'BR', name: 'Blue to red', value: 0 }, { id: 'AR', name: 'Alpha to red', value: 0 }, { id: 'OR', name: 'red offset', value: 0 }],
+  [{ id: 'RG', name: 'Red to green', value: 0 }, { id: 'GG', name: 'Green to green', value: 1 }, { id: 'BG', name: 'Blue to green', value: 0 }, { id: 'AG', name: 'Alpha to green', value: 0 }, { id: 'OG', name: 'green offset', value: 0 }],
+  [{ id: 'RB', name: 'Red to blue', value: 0 }, { id: 'GB', name: 'Green to blue', value: 0 }, { id: 'BB', name: 'Blue to blue', value: 1 }, { id: 'AB', name: 'Alpha to blue', value: 0 }, { id: 'OB', name: 'blue offset', value: 0 }],
+  [{ id: 'RA', name: 'Red to alpha', value: 0 }, { id: 'GA', name: 'Green to alpha', value: 0 }, { id: 'BA', name: 'Blue to alpha', value: 0 }, { id: 'AA', name: 'Alpha to alpha', value: 1 }, { id: 'OA', name: 'alpha offset', value: 0 }],
 ]
 
 const matrix = ref(cloneDeep(defVal));
