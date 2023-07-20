@@ -40,10 +40,15 @@
     <section class="controler">
       <el-collapse v-model="activeNames">
         <el-collapse-item title="颜色矩阵" name="1">
-
-          <div class="group" v-for="(array) in matrix">
+          <div class="group">
+            <span style="color:#fff">&&nbsp;</span>
+            <div class="item" v-for="(item) in vals">
+              <p class="title">{{ item }}</p>
+            </div>
+          </div>
+          <div class="group" v-for="(array, index) in matrix">
+            {{ vals[index] }}
             <div class="item" v-for="(item) in array">
-              <label>{{ item.id }}:</label>
               <div class="result">
                 {{ item.value }}
                 <div class="pop">
@@ -89,6 +94,8 @@ import demoPic from '@/assets/images/demo.png';
 import { ref, computed } from 'vue';
 import { cloneDeep } from 'lodash';
 import { genFileId } from 'element-plus'
+
+const vals = ['R', 'G', 'B', 'A', 'offset']
 
 // 颜色矩阵
 /**
@@ -184,25 +191,23 @@ const handleChange= (file:any, fileList:any) => {//选中文件触发的change�
     margin-bottom: 20px;
 
     .group {
-      width: 60%;
+      min-width: 30%;
+      max-width: 40%;
       display: flex;
       justify-content: space-between;
       margin: 20px 0;
-
       .item {
         display: flex;
-
-        label {
-          margin-right: 10px;
+        
+        .title{
+          width: 80px;
+          text-align: center;
         }
-
         .result {
           position: relative;
           width: 80px;
           border: 1px solid #eee;
           text-align: center;
-          margin-left: 20px;
-          margin-right: 20px;
 
           cursor: pointer;
 
